@@ -3,6 +3,7 @@ import torch.nn as nn
 from torchvision import models
 import torchvision.transforms as transforms
 import json
+import pickle as pkl
 
 # open JSON file
 def open_json(file_path):
@@ -40,3 +41,8 @@ def process_image(image, transform, model, device):
     im = im.to(device)
     out = model(im)
     return out.squeeze()
+
+def open_feats(file_path):
+    with open(file_path, 'rb') as handle:
+        feat_dict = pkl.load(handle)
+    return feat_dict
